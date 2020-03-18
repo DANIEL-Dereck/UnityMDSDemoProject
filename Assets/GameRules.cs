@@ -36,6 +36,11 @@ public class GameRules : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        for (int i = 0; i < players.Length; i++)
+        {
+            players[i].initialPosition = players[i].gameObject.transform.position;
+        }
+
         BallCollisionEmitter emitter = ball.gameObject.GetComponentInChildren<BallCollisionEmitter>();
         emitter.OnCollided += Emitter_OnCollided;
 
