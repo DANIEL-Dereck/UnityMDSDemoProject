@@ -8,9 +8,12 @@ namespace Part2
     public class BallAnimator : MonoBehaviour
     {
         public int animationSpeedRatio = 5;
+        public float animationAplitudeMin = 1;
 
         private SpritesheetAnimator animator;
         private Rigidbody2D body;
+
+        public ParticleSystem particleSystem;
 
         // Start is called before the first frame update
         void Start()
@@ -27,6 +30,7 @@ namespace Part2
 
             animator.animationSpeed = amplitude * animationSpeedRatio;
             body.rotation = Mathf.Rad2Deg * Mathf.Atan2(vitesse.y, vitesse.x);
+            particleSystem.gameObject.SetActive(amplitude > animationAplitudeMin);
         }
     }
 }

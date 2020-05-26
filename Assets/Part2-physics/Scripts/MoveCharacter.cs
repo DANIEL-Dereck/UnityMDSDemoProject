@@ -17,8 +17,9 @@ namespace Part2
         // COOLDOWNS
         [Tooltip("Cooldown of a roll in seconds")]
         public float rollCooldownDuration = 1;
-
         private float rollCooldown = 0;
+
+        public ParticleSystem particleSystem;
 
         void Start()
         {
@@ -45,12 +46,14 @@ namespace Part2
             {
                 vitesse += Vector2.left;
                 spriteRenderer.flipX = true;
+                particleSystem.GetComponent<ParticleSystemRenderer>().flip = new Vector3(0, 0, 0);
             }
 
             if (Input.GetKey(KeyCode.RightArrow))
             {
                 vitesse += Vector2.right;
                 spriteRenderer.flipX = false;
+                particleSystem.GetComponent<ParticleSystemRenderer>().flip = new Vector3(1, 1, 1);
             }
 
             if (Input.GetKeyDown(KeyCode.Space) && rollCooldown <= 0)
@@ -63,10 +66,12 @@ namespace Part2
             {
                 if (vitesse.magnitude > 0)
                 {
+                    particleSystem.gameObject.SetActive(true);
                     animator.Play(Anims.Run);
                 }
                 else
                 {
+                    particleSystem.gameObject.SetActive(false);
                     animator.Play(Anims.Iddle);
                 }
             }

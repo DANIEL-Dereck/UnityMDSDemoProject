@@ -10,6 +10,9 @@ namespace Part2
         private Rigidbody2D body;
         private SpritesheetAnimator animator;
 
+        public float animationAplitudeMin = 1;
+        public ParticleSystem particleSystem;
+
         void Start()
         {
             animator = GetComponent<SpritesheetAnimator>();
@@ -22,6 +25,8 @@ namespace Part2
             float amplitude = vitesse.magnitude;
             animator.animationSpeed = amplitude * animtionSpeedRatio;
             body.rotation = Mathf.Rad2Deg * Mathf.Atan2(vitesse.y, vitesse.x);
+            particleSystem.gameObject.SetActive(amplitude > animationAplitudeMin);
+            particleSystem.startColor = new Color(0, 255 % animator.animationSpeed, 0);
         }
 
         /*
